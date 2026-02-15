@@ -1,0 +1,43 @@
+name: 更新资源索引
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '01-模型与研究/**'
+      - '02-工具与平台/**'
+      - '03-教程与实践/**'
+      - '04-行业洞察/**'
+      - '05-社区资源/**'
+      - '06-每周精选/**'
+  workflow_dispatch:
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 设置Python环境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: 生成资源索引
+        run: |
+          python scripts/generate-index.py
+      
+      - name: 提交更改
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git diff --quiet && git diff --staged --quiet || git commit -m "自动更新：资源索引 [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
