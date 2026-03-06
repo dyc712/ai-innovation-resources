@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>每日财经投资深度日报 · 2026-03-06</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card-bg: #1a1d2e;
+      --card-border: #252840;
+      --text: #e2e8f0;
+      --text-muted: #8892a4;
+      --accent-energy: #f97316;
+      --accent-geo: #8b5cf6;
+      --accent-market: #06b6d4;
+      --accent-summary: #10b981;
+      --tag-high: #ef4444;
+      --tag-mid-high: #f97316;
+      --tag-mid: #3b82f6;
+      --gold: #fbbf24;
+      --green: #10b981;
+      --red: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 0 0 60px;
+    }
+
+    /* ─── 顶部警告横幅 ─── */
+    .alert-banner {
+      background: linear-gradient(90deg, #7f1d1d, #991b1b, #7f1d1d);
+      border-bottom: 2px solid #ef4444;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .alert-icon { font-size: 20px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* ─── 页头 ─── */
+    .header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1a1d2e 60%, #0f172a 100%);
+      padding: 32px 24px 24px;
+      border-bottom: 1px solid #2d3748;
+    }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .header-title { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+    .header-title span { color: var(--gold); }
+    .header-meta { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .header-badge {
+      background: rgba(239,68,68,0.15); border: 1px solid #ef4444;
+      color: #ef4444; padding: 4px 12px; border-radius: 20px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    }
+
+    /* ─── 数据栏 ─── */
+    .data-bar {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      padding: 20px 24px 0;
+    }
+    .data-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      min-width: 130px;
+      flex: 1;
+    }
+    .data-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .data-value { font-size: 20px; font-weight: 700; margin-top: 2px; }
+    .data-change { font-size: 11px; margin-top: 2px; }
+    .up { color: var(--red); }
+    .down { color: var(--green); }
+    .neutral { color: var(--text-muted); }
+
+    /* ─── 主体容器 ─── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+
+    /* ─── 板块标题 ─── */
+    .section-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 28px 0 14px;
+      border-bottom: 1px solid #2d3748;
+      margin-bottom: 16px;
+    }
+    .section-icon { font-size: 22px; }
+    .section-title { font-size: 16px; font-weight: 700; letter-spacing: 0.5px; }
+    .section-count {
+      margin-left: auto;
+      background: rgba(255,255,255,0.06);
+      padding: 3px 10px; border-radius: 12px;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    /* ─── 信息卡片 ─── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #4a5568; }
+    .card-inner { padding: 18px 20px; border-left: 4px solid; }
+    .card-energy { border-left-color: var(--accent-energy); }
+    .card-geo { border-left-color: var(--accent-geo); }
+    .card-market { border-left-color: var(--accent-market); }
+    .card-summary { border-left-color: var(--accent-summary); }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .card-title { font-size: 15px; font-weight: 700; line-height: 1.4; flex: 1; min-width: 200px; }
+    .card-time { font-size: 11px; color: var(--text-muted); white-space: nowrap; margin-top: 3px; }
+
+    .card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px; border-radius: 12px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
+    }
+    .badge-extreme { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-high    { background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+    .badge-mid     { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+    .badge-tag { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.08); }
+
+    .card-content { font-size: 13.5px; color: #cbd5e1; margin-bottom: 10px; }
+
+    .card-insight {
+      background: rgba(16,185,129,0.07);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #a7f3d0;
+      margin-bottom: 10px;
+    }
+    .card-insight-label { font-size: 11px; color: #6ee7b7; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .card-source { font-size: 11px; }
+    .card-source a { color: #60a5fa; text-decoration: none; }
+    .card-source a:hover { text-decoration: underline; }
+
+    /* ─── 执行摘要板块 ─── */
+    .summary-box {
+      background: linear-gradient(135deg, #0d1b1e, #1a2a2e);
+      border: 1px solid rgba(6,182,212,0.3);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+    .summary-box ul { list-style: none; padding: 0; }
+    .summary-box li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 13.5px;
+      display: flex;
+      gap: 10px;
+    }
+    .summary-box li:last-child { border-bottom: none; }
+    .bullet { color: var(--accent-market); font-weight: 700; flex-shrink: 0; }
+
+    /* ─── 深度精选 ─── */
+    .featured-box {
+      background: linear-gradient(135deg, #1a1229, #1e1b2e);
+      border: 1px solid rgba(139,92,246,0.4);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+    .featured-title { font-size: 16px; font-weight: 700; color: #c4b5fd; margin-bottom: 8px; }
+    .featured-why {
+      background: rgba(139,92,246,0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #ddd6fe;
+      margin-top: 10px;
+    }
+    .featured-why-label { font-size: 11px; color: #a78bfa; font-weight: 700; margin-bottom: 4px; }
+
+    /* ─── 底部 ─── */
+    .footer {
+      border-top: 1px solid #2d3748;
+      padding: 20px 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .data-item { min-width: 42%; }
+      .card-inner { padding: 14px 16px; }
+      .header { padding: 20px 16px 16px; }
+      .data-bar { padding: 14px 16px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ⚠️ 极端风险横幅 -->
+<div class="alert-banner">
+  <span class="alert-icon">🚨</span>
+  <span>极端风险警告：霍尔木兹海峡实际封闭已进入第5天——全球约20%原油+20% LNG过境受阻，多艘亚洲油轮滞留波斯湾，柴油/LNG/精炼品供应链面临系统性断裂风险</span>
+</div>
+
+<!-- 页头 -->
+<div class="header">
+  <div class="container">
+    <div class="header-top">
+      <div>
+        <div class="header-title">每日财经投资深度日报 · <span>投资人版</span></div>
+        <div class="header-meta">2026-03-06（星期五）· 覆盖时间窗口：2026-03-05 00:00 – 2026-03-06 08:00 UTC+8</div>
+        <div class="header-meta" style="margin-top:6px;">信息源：OilPrice.com · ZeroHedge / Newsquawk · Bloomberg · Reuters</div>
+      </div>
+      <div class="header-badge">⚡ 战时能源危机模式</div>
+    </div>
+  </div>
+</div>
+
+<!-- 顶部数据栏 -->
+<div class="container">
+  <div class="data-bar">
+    <div class="data-item">
+      <div class="data-label">布伦特原油</div>
+      <div class="data-value up">$85+</div>
+      <div class="data-change up">↑ 从$70飙升（冲突前）</div>
+    </div>
+    <div class="data-item">
+      <div class="data-label">WTI 原油</div>
+      <div class="data-value up">$80+</div>
+      <div class="data-change up">↑ 突破2025年1月以来高位</div>
+    </div>
+    <div class="data-item">
+      <div class="data-label">LNG船运费</div>
+      <div class="data-value up">$30万/天</div>
+      <div class="data-change up">↑ 较上周$4万暴涨650%</div>
+    </div>
+    <div class="data-item">
+      <div class="data-label">亚洲炼油利润</div>
+      <div class="data-value up">~$30/桶</div>
+      <div class="data-change up">↑ 四年最高（新加坡复杂裂解）</div>
+    </div>
+    <div class="data-item">
+      <div class="data-label">DXY 美元指数</div>
+      <div class="data-value up">98.66–99.20</div>
+      <div class="data-change up">↑ 避险买入支撑</div>
+    </div>
+    <div class="data-item">
+      <div class="data-label">美股情绪</div>
+      <div class="data-value" style="color:#ef4444;">Risk-Off</div>
+      <div class="data-change" style="color:#8892a4;">能源板块独绿，科技/消费滞</div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding-top:8px;">
+
+  <!-- ══════════════════════════════════════════
+       板块一：🔥 能源与大宗商品（5条）
+  ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">🔥</span>
+    <span class="section-title">能源与大宗商品</span>
+    <span class="section-count">5 条</span>
+  </div>
+
+  <!-- 卡片 1 -->
+  <div class="card">
+    <div class="card-inner card-energy">
+      <div class="card-top">
+        <div class="card-title">霍尔木兹海峡实际封闭第5天：亚洲油轮滞留超37艘，通行量从40艘/日骤降至1艘</div>
+        <div class="card-time">2026-03-05 05:29 CST</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-extreme">🔴 极高</span>
+        <span class="badge badge-tag">#能源</span>
+        <span class="badge badge-tag">#地缘</span>
+        <span class="badge badge-tag">#大宗商品</span>
+      </div>
+      <div class="card-content">
+        印度37艘油轮（含1109名船员）及韩国至少7艘原油油轮被困波斯湾/霍尔木兹附近区域。Vortexa数据显示，海峡过境量从1月份每日40艘骤降至3月3日仅1艘。韩国某滞留油轮已装载200万桶中东原油（约等于韩国一天石油消耗量）。伊朗革命卫队宣布禁止美国、以色列及欧洲船只通行，但宣称海峡"技术上未关闭"。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        核心危机信号：供应断裂已从"风险"变为"现实"。受益方：西非/美国湾区/澳大利亚等非中东供应商（替代运输路线）、替代油轮公司（绕道好望角的VLCC运营商）、美国页岩油生产商（XOM/CVX/COP）、美国LNG出口商（LNG、LNGG）。受损方：韩国/日本/印度精炼商（95%+原油依赖中东），台湾能源安全风险加剧。关注：战略石油储备释放信号（日本已呼吁）。
+      </div>
+      <div class="card-source">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Dozens-of-Asia-Flagged-Oil-Tankers-Stranded-near-Strait-of-Hormuz.html" target="_blank">OilPrice.com – Tsvetana Paraskova, Mar 05</a></div>
+    </div>
+  </div>
+
+  <!-- 卡片 2 -->
+  <div class="card">
+    <div class="card-inner card-energy">
+      <div class="card-top">
+        <div class="card-title">LNG船运费一周内暴涨650%至30万美元/天：卡塔尔力马熄力 + 霍尔木兹封路双重冲击</div>
+        <div class="card-time">2026-03-05 07:10 CST</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-extreme">🔴 极高</span>
+        <span class="badge badge-tag">#能源</span>
+        <span class="badge badge-tag">#大宗商品</span>
+        <span class="badge badge-tag">#资金流向</span>
+      </div>
+      <div class="card-content">
+        据船舶经纪商Fearnleys数据，174,000立方米LNG船即期租金从上周约4万美元/天飙升至约30万美元/天，美湾-欧洲和美湾-亚洲航线均达30万美元，澳大利亚-亚洲线达25.5万美元。卡塔尔已宣布不可抗力并暂停LNG生产，UAE+卡塔尔合计占全球LNG供应约20%。85%的卡塔尔LNG出口输往亚洲买家（中国、印度、日本、韩国、台湾）。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        最强结构性机会之一。受益：拥有美国LNG出口业务的公司（Cheniere Energy $LNG、New Fortress Energy $NFE）；澳大利亚/西非LNG出口商；LNG/VLCC船运公司（FLEX LNG、Golar LNG、GLNG）。受损：欧洲进口国（将与亚洲竞价抢货）；日本/韩国电力公司（燃料成本暴涨）。中国此前大量储油，但LNG储备薄弱，面临冬转春供应压力。
+      </div>
+      <div class="card-source">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/LNG-Shipping-Rates-Soar-650-to-300000-Per-Day.html" target="_blank">OilPrice.com – Charles Kennedy, Mar 05</a></div>
+    </div>
+  </div>
+
+  <!-- 卡片 3 -->
+  <div class="card">
+    <div class="card-inner card-energy">
+      <div class="card-top">
+        <div class="card-title">伊朗导弹袭击巴林BAPCO 40.5万桶/日炼厂：裂解价差当日飙涨，柴油/航油供应最脆弱</div>
+        <div class="card-time">2026-03-05 10:45 CST（更新至11:13）</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-extreme">🔴 极高</span>
+        <span class="badge badge-tag">#能源</span>
+        <span class="badge badge-tag">#地缘</span>
+      </div>
+      <div class="card-content">
+        伊朗对巴林Ma'ameer工业区发动短程弹道导弹攻击，巴林国家石油公司BAPCO确认其405,000桶/日Sitra炼厂遭到直接打击，厂区起火但宣称仍可运营且无人员伤亡。ICE低硫柴油期货当日早盘飙涨逾100美元/公吨，远超布伦特原油涨幅。此前沙特550,000桶/日 Ras Tanura炼厂（沙特最大）已遭无人机袭击停运。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        冲突目标已从原油生产转向精炼能力，是更紧迫的市场信号。精炼端比上游更缺乏替代弹性：原油可靠库存和备用产能缓冲，精炼损失几乎立即传导至成品油价格。受益：柴油/航油裂解价差扩大利好非中东炼厂（欧洲/美国炼厂）；航运替代路线公司。跟踪信号：ICE gasoil crack spread、柴油期货ULSD。
+      </div>
+      <div class="card-source">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Drone-Strike-Hits-Bahrain-Refinery-as-Crack-Spreads-Surge.html" target="_blank">OilPrice.com – Julianne Geiger, Mar 05</a></div>
+    </div>
+  </div>
+
+  <!-- 卡片 4 -->
+  <div class="card">
+    <div class="card-inner card-energy">
+      <div class="card-top">
+        <div class="card-title">中国紧急叫停燃油出口：反映国内供应焦虑，亚洲炼油利润创四年新高</div>
+        <div class="card-time">2026-03-05 00:49 CST</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-high">🟠 高</span>
+        <span class="badge badge-tag">#能源</span>
+        <span class="badge badge-tag">#宏观政策</span>
+        <span class="badge badge-tag">#大宗商品</span>
+      </div>
+      <div class="card-content">
+        中国北京要求能源公司立即暂停汽油、柴油新出口合同并尽力取消已签合同（航班加油和燃料油例外）。中国是亚洲第三大成品油出口国（仅次于韩国、新加坡），年初配额已向中石化/中石油分配逾1376万吨。与此同时，新加坡复杂炼油利润率飙至约30美元/桶——四年最高，因亚洲炼厂已考虑削减原油加工量20-30%。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        中国的出口叫停是防御性举措，印证其油储充足但供应链焦虑上升。对全球成品油市场：短期将加剧亚洲/欧洲成品油供应缺口，推高柴油/汽油现货价格。受益方：欧洲独立炼厂（Neste、Repsol）；非中东地区的炼油资产。中国稳储备信号表明不会轻易抛售原油库存，为油价提供地板价支撑。
+      </div>
+      <div class="card-source">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/China-Halts-Fuel-Exports-Amid-Global-Market-Squeeze.html" target="_blank">OilPrice.com – Irina Slav, Mar 05</a> / Reuters</div>
+    </div>
+  </div>
+
+  <!-- 卡片 5 -->
+  <div class="card">
+    <div class="card-inner card-energy">
+      <div class="card-top">
+        <div class="card-title">哥伦比亚Ecopetrol宣布可能扩大增产：布伦特已从$70飙至$85+，非中东供应商进入战略窗口</div>
+        <div class="card-time">2026-03-05 15:19 CST</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-high">🟠 高</span>
+        <span class="badge badge-tag">#能源</span>
+        <span class="badge badge-tag">#大宗商品</span>
+      </div>
+      <div class="card-content">
+        哥伦比亚国家石油公司Ecopetrol CEO Ricardo Roa在季度财报电话会议中表示，若高油价持续，公司将把资本支出调整至指引上限（54–67亿美元），并在短期内扩产。该公司此前2026年产量预期730-740万桶/日（当量），基于$60布伦特制定计划，比2025年上半年实际产量有所下滑。CFO补充，运费已上涨150-160%，将部分抵消高油价收益。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        Ecopetrol是"危机受益者"典型案例，可作为非中东增产预期的代理标的跟踪。更广泛的信号：危机持续→非OPEC非中东产油国（拉美、非洲、北美）资本支出预期上修。关注：Ecopetrol (EC)股价；同类标的包括Petrobras (PBR)、Equinor (EQNR)、加拿大油砂商CNQ/SU。
+      </div>
+      <div class="card-source">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Ecopetrol-Eyes-Oil-Output-Boost-As-Iran-Crisis-Pushes-Up-Prices.html" target="_blank">OilPrice.com – Julianne Geiger, Mar 05</a></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       板块二：🌍 地缘与宏观博弈（4条）
+  ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <span class="section-title">地缘与宏观博弈</span>
+    <span class="section-count">4 条</span>
+  </div>
+
+  <!-- 卡片 6 -->
+  <div class="card">
+    <div class="card-inner card-geo">
+      <div class="card-top">
+        <div class="card-title">中国斡旋霍尔木兹：传北京正与伊朗谈判保障油气过境安全，油价盘中回落</div>
+        <div class="card-time">2026-03-05（美股交易时段）</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-extreme">🔴 极高</span>
+        <span class="badge badge-tag">#地缘</span>
+        <span class="badge badge-tag">#宏观政策</span>
+        <span class="badge badge-tag">#资金流向</span>
+      </div>
+      <div class="card-content">
+        Bloomberg/Reuters报道中国正与伊朗谈判，希望保障石油和天然气船只安全通行霍尔木兹，消息一出原油盘中拉回部分涨幅，美元及黄金亦跟随回调。伊朗副外长同日表示"伊朗愿意放弃核计划，条件是美国提出有价值的替代方案"。与此同时，伊朗表示并未向美国发出停止冲突的信息，仍专注于自卫。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        这是目前最关键的"油价开关"：中国调停进展将决定能源市场短期方向。若谈判有实质突破→油价快速回落至$75-78，LNG船运费暴跌，空头机会；若谈判破裂/停滞→JPMorgan"第8天3.3MBD减产"情景逐步成真，油价冲向$100+。跟踪信号：伊朗核谈动态、IRGC声明、霍尔木兹过境船只数量（Vortexa实时数据）。
+      </div>
+      <div class="card-source">来源：ZeroHedge / Newsquawk US Market Wrap, Mar 05</div>
+    </div>
+  </div>
+
+  <!-- 卡片 7 -->
+  <div class="card">
+    <div class="card-inner card-geo">
+      <div class="card-top">
+        <div class="card-title">霍尔木兹危机多米诺：欧元区或被迫加息——货币市场定价ECB年末加息概率约40%</div>
+        <div class="card-time">2026-03-05</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-extreme">🔴 极高</span>
+        <span class="badge badge-tag">#宏观政策</span>
+        <span class="badge badge-tag">#地缘</span>
+      </div>
+      <div class="card-content">
+        OilPrice.com深度分析指出，持续的能源价格冲击已令全球货币政策预期逆转：欧元区货币市场开始定价约40%概率ECB在年底前被迫加息（此前预期减息），英国市场也削减降息预期。2月欧元区CPI为1.9%（仍低于2%目标但在加速）。国债期货受能源通胀预期压制双边下跌，Spain拒绝美军空袭使用其基地后Trump威胁切断贸易关系，欧盟政治撕裂加剧。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        若能源冲击持续→美联储+英央行降息预期被进一步推后，美债收益率偏高，美元偏强。欧洲能源进口依赖度极高，若ECB被迫加息将重击已疲弱的欧洲经济。受益：美元多头、欧洲能源替代商；受损：欧洲消费股、高负债REITs。关注：ECB Lagarde讲话（今日）、美国NFP非农数据（今日13:30 GMT）。
+      </div>
+      <div class="card-source">来源：<a href="https://oilprice.com/Energy/Energy-General/Hormuz-Crisis-Sends-Shockwaves-Through-Global-Markets.html" target="_blank">OilPrice.com深度分析, Mar 05</a></div>
+    </div>
+  </div>
+
+  <!-- 卡片 8 -->
+  <div class="card">
+    <div class="card-inner card-geo">
+      <div class="card-top">
+        <div class="card-title">美国起草全球AI芯片出口许可新规：所有国家向Nvidia/AMD采购须经美国审批</div>
+        <div class="card-time">2026-03-05（美股交易时段）</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-high">🟠 高</span>
+        <span class="badge badge-tag">#科技</span>
+        <span class="badge badge-tag">#行业结构</span>
+        <span class="badge badge-tag">#宏观政策</span>
+      </div>
+      <div class="card-content">
+        Bloomberg报道美国官员已起草法规，要求几乎所有AI加速芯片（Nvidia/AMD）的全球出口须获美国政府批准，从此前针对约40个国家扩展至全球覆盖。规则按算力规模分级：1000块以下GB300 GPU相对简单审查；大型集群需预先审批并披露商业模式；超20万块（单公司/单国）须由所在国政府承诺安全保障并对美国AI进行"匹配性投资"。消息导致Nvidia、AMD及半导体板块盘中大跌。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        若法规落地：Nvidia面临额外出口不确定性，短期股价承压；但长期若美国掌控全球AI基础设施审批，反而强化其垄断地位。受益：替代方案研发（Huawei Ascend在中国市场地位进一步巩固）；国内算力安全概念（A股AI芯片：寒武纪、华为海思供应链）。关注：法规是否从草案进入正式立法程序，以及盟友国政府的反应。
+      </div>
+      <div class="card-source">来源：<a href="https://www.zerohedge.com/markets/stocks-tumble-report-us-plans-licenses-global-chip-exports" target="_blank">ZeroHedge / Bloomberg, Mar 05</a></div>
+    </div>
+  </div>
+
+  <!-- 卡片 9 -->
+  <div class="card">
+    <div class="card-inner card-geo">
+      <div class="card-top">
+        <div class="card-title">波兰央行行长研究出售黄金储备资助国防预算，金价盘中承压</div>
+        <div class="card-time">2026-03-05</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-mid">🔵 中</span>
+        <span class="badge badge-tag">#宏观政策</span>
+        <span class="badge badge-tag">#大宗商品</span>
+        <span class="badge badge-tag">#地缘</span>
+      </div>
+      <div class="card-content">
+        波兰国家银行(NBP)行长据报道正在研究出售部分黄金储备，用于资助国防预算扩张。消息传出后现货黄金价格盘中承压下跌。背景：欧洲多国正大幅增加国防支出（法、德、英已宣布向塞浦路斯增派军事力量应对中东溢出风险）。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        冷门但结构性信号：若欧洲多国央行效仿出售黄金筹措国防资金，将成为黄金中期的供应端压力（与近年央行购金趋势逆转）。短期影响有限（波兰黄金储备规模不大），但需跟踪是否有其他欧洲央行跟进。当前黄金在地缘避险与央行抛压之间博弈；若中东冲突升级，避险需求仍占主导。关注黄金/实际利率相关性变化。
+      </div>
+      <div class="card-source">来源：ZeroHedge / Newsquawk US Market Wrap, Mar 05</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       板块三：📈 市场结构与机构动向（3条）
+  ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">📈</span>
+    <span class="section-title">市场结构与机构动向</span>
+    <span class="section-count">3 条</span>
+  </div>
+
+  <!-- 卡片 10 -->
+  <div class="card">
+    <div class="card-inner card-market">
+      <div class="card-top">
+        <div class="card-title">Citadel策略师Rubner逆向转多：悲观情绪过度蔓延、空头过于拥挤，给出10个看涨理由</div>
+        <div class="card-time">2026-03-05</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-high">🟠 高</span>
+        <span class="badge badge-tag">#资金流向</span>
+        <span class="badge badge-tag">#市场结构</span>
+      </div>
+      <div class="card-content">
+        Citadel证券的股票策略师Scott Rubner在全球路演后宣布撤销2月以来的战术性看空股市判断，理由是"悲观阵营已变得过于拥挤"——市场情绪极度悲观本身就是反向做多信号。与此同时，Goldman Sachs One Delta Desk警告"虽然市场似乎对关注感到疲倦，但情况仍可能继续实质性恶化"，维持防御性偏向。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        两大信号并存：Citadel反向看多 vs Goldman继续防御，代表市场专业玩家内部的重大分歧。这种情绪极端分化往往预示近期波动加剧。策略建议：密切观察本日美国NFP非农数据——强非农=通胀担忧加剧+降息预期推后+美股继续承压；弱非农=降息预期回归+科技/成长股反弹。能源板块无论哪种情景均为相对强势方向。
+      </div>
+      <div class="card-source">来源：ZeroHedge Premium, Mar 05</div>
+    </div>
+  </div>
+
+  <!-- 卡片 11 -->
+  <div class="card">
+    <div class="card-inner card-market">
+      <div class="card-top">
+        <div class="card-title">Broadcom超预期财报+$100亿回购：AI芯片需求强劲，半导体板块分化加剧</div>
+        <div class="card-time">2026-03-05（盘后）</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-high">🟠 高</span>
+        <span class="badge badge-tag">#科技</span>
+        <span class="badge badge-tag">#行业结构</span>
+        <span class="badge badge-tag">#资金流向</span>
+      </div>
+      <div class="card-content">
+        Broadcom (AVGO) Q1 2026财报：调整后EPS 2.05（预期2.02），营收193亿美元（预期192.2亿），均超预期，并发布强于预期的收入指引，宣布100亿美元股票回购计划。盘前涨7%。相比之下，Nvidia和AMD因AI芯片全球出口许可草规消息盘中遭抛售。JD.com Q4营收504亿美元（略低于预期507亿），宣派0.50美元/股年度股息。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        Broadcom的强劲表现确认AI基础设施需求实质性存在，但出口管制草规制造了NVDA/AMD的政策风险折价。这创造了板块内部分化机会：自定义ASIC路线（AVGO/Marvell）vs 通用GPU（NVDA/AMD）的相对价值交易。100亿回购也是机构增持的技术性支撑。跟踪：AI芯片出口草规是否进展为正式规则；NVDA对中国市场的收入敞口。
+      </div>
+      <div class="card-source">来源：ZeroHedge / Newsquawk, Mar 05</div>
+    </div>
+  </div>
+
+  <!-- 卡片 12 -->
+  <div class="card">
+    <div class="card-inner card-market">
+      <div class="card-top">
+        <div class="card-title">美国进口/单位劳动力成本双双高于预期，周五非农报告预测仅5.9万：滞胀路径强化</div>
+        <div class="card-time">2026-03-05</div>
+      </div>
+      <div class="card-badges">
+        <span class="badge badge-high">🟠 高</span>
+        <span class="badge badge-tag">#宏观政策</span>
+        <span class="badge badge-tag">#资金流向</span>
+      </div>
+      <div class="card-content">
+        1月美国进口价格MoM +0.2%（符合预期），单位劳动力成本高于预期；2月Challenger企业裁员48,307人（较1月108,435人有所下降），科技行业裁员11,039人。Newsquawk预测2月NFP非农新增就业5.9万（vs 1月13万），接近5万人"盈亏平衡线"。能源价格持续上涨推低美债价格/推高国债收益率。
+      </div>
+      <div class="card-insight">
+        <div class="card-insight-label">💡 投资含义</div>
+        滞胀组合（增长放缓+成本上升）正在成形：若今日NFP弱于预期且能源价格维持高位，美联储陷入"降也不是、不降也不是"的政策两难。对债券：短期承压（能源通胀>弱增长）；对美股：避险情绪持续压制估值，能源/防御板块相对占优；对美元：若降息预期继续后退，美元维持强势。今日最重要事件：NFP（13:30 GMT）+ Lagarde讲话。
+      </div>
+      <div class="card-source">来源：ZeroHedge / Newsquawk US Market Wrap, Mar 05</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       板块四：⚡ 今日执行摘要
+  ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <span class="section-title">今日执行摘要</span>
+    <span class="section-count">投资人必读</span>
+  </div>
+
+  <div class="summary-box">
+    <ul>
+      <li>
+        <span class="bullet">01</span>
+        <span><strong>霍尔木兹第5天：每日过境从40艘→1艘</strong>，JPMorgan警告第8天开始将有330万桶/日减产，全球原油+LNG系统性断供从概率变为现实，布伦特$85已是新起点而非顶部。</span>
+      </li>
+      <li>
+        <span class="bullet">02</span>
+        <span><strong>LNG船运费一周暴涨650%</strong>，卡塔尔停产宣布不可抗力，全球20% LNG供应面临中断。美国LNG出口商（Cheniere $LNG）、LNG船运公司（FLEX LNG、Golar $GLNG）是最强结构性受益标的。</span>
+      </li>
+      <li>
+        <span class="bullet">03</span>
+        <span><strong>冲突目标已转向精炼端</strong>（巴林BAPCO+沙特Ras Tanura均遭袭击）——柴油/航油裂解价差是比原油更急迫的涨价信号，ICE gasoil crack spread需重点跟踪。</span>
+      </li>
+      <li>
+        <span class="bullet">04</span>
+        <span><strong>中国斡旋是最大油价开关</strong>：北京与伊朗谈判若有进展，可在24-48小时内触发油价快速回调（$10-15/桶空间）；若停滞，$100场景正在倒计时。务必设置双向对冲。</span>
+      </li>
+      <li>
+        <span class="bullet">05</span>
+        <span><strong>欧元区货币市场罕见定价加息概率</strong>——能源通胀如持续，ECB由鸽转鹰路径已被市场40%定价，欧洲债券/高负债资产面临双重压力（能源成本+利率上行）。</span>
+      </li>
+      <li>
+        <span class="bullet">06</span>
+        <span><strong>AI芯片出口全球许可草规</strong>：若落地将重构全球算力供应链，短期NVDA/AMD政策风险折价，自定义ASIC（Broadcom/Marvell）相对获益，国产算力（寒武纪等）逻辑进一步强化。</span>
+      </li>
+      <li>
+        <span class="bullet">07</span>
+        <span><strong>今日关键数据</strong>：美国2月NFP非农（13:30 GMT）预期5.9万——低于预期确认滞胀路径；ECB Lagarde讲话；美联储多位官员（Goolsbee/Daly/Collins/Hammack）发言。</span>
+      </li>
+      <li>
+        <span class="bullet">08</span>
+        <span><strong>非中东产油商进入战略增产窗口</strong>：Ecopetrol (EC)、Petrobras (PBR)、Equinor (EQNR)、加拿大油砂（CNQ/SU）等作为替代供应受益；Shell/BP等拥有非中东资产的国际大型石油公司亦值得关注。</span>
+      </li>
+    </ul>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       板块五：⭐ 今日深度精选
+  ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">⭐</span>
+    <span class="section-title">今日深度精选</span>
+    <span class="section-count">最值得深读</span>
+  </div>
+
+  <div class="featured-box">
+    <div class="featured-title">
+      🏆 深度精选：《LNG船运费一周暴涨650%至30万美元/天》
+    </div>
+    <div style="color:#a5b4fc; font-size:13px; margin-bottom:10px;">
+      来源：OilPrice.com (Fearnleys报告) | 2026-03-05 07:10 CST
+    </div>
+    <div style="font-size:13.5px; color:#c4b5fd; line-height:1.8;">
+      这条信息表面是"运费新闻"，实质上是整个霍尔木兹危机对全球LNG市场冲击的<strong>最精准量化指标</strong>。
+    </div>
+    <div class="featured-why">
+      <div class="featured-why-label">📖 为什么今天必须深读这条</div>
+      <p>1. <strong>650%的涨幅本身是全球能源恐慌的实时体温计</strong>——它不是分析师预测，而是市场在真实成本上的货币投票。船运费涨至$30万/天意味着每卡货LNG的运费成本上升约$1-2/MMBtu，直接嵌入下游用气成本。</p>
+      <br>
+      <p>2. <strong>背后的结构性重组</strong>：卡塔尔+UAE占全球20% LNG供应，85%流向亚洲。一旦中断，欧洲会与亚洲在同一现货市场竞价（2022年的重演加强版），造成全球天然气价格趋同性飙升，欧洲工业成本直接受压。</p>
+      <br>
+      <p>3. <strong>投资机会窗口极窄</strong>：LNG船运公司（FLEX LNG、Golar GLNG）、美国LNG出口商（Cheniere LNG、New Fortress NFE）的股价通常需要1-3天才能完全反映运费暴涨。若中东谈判未有实质进展，这些标的仍有大幅上行空间；而一旦霍尔木兹重开，则将是获利了结时机。</p>
+      <br>
+      <p>4. <strong>冷门但重要的传导链</strong>：LNG船运费高企→亚洲LNG现货价格上升→日本/韩国/台湾电力成本上升→工业利润受压→这些市场的工业股/电力股的隐性风险被低估。</p>
+    </div>
+    <div style="margin-top: 12px; font-size: 12px; color: #8892a4;">
+      原文链接：<a href="https://oilprice.com/Latest-Energy-News/World-News/LNG-Shipping-Rates-Soar-650-to-300000-Per-Day.html" target="_blank" style="color:#60a5fa;">https://oilprice.com/Latest-Energy-News/World-News/LNG-Shipping-Rates-Soar-650-to-300000-Per-Day.html</a>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <div class="container">
+    每日财经投资深度日报 · 仅供参考，不构成投资建议 · 生成时间：2026-03-06 08:00 CST<br>
+    信息来源：OilPrice.com · ZeroHedge · Newsquawk · Bloomberg · Reuters · Vortexa · Fearnleys<br>
+    收录条数：12条 | 能源5条 · 地缘宏观4条 · 市场机构3条
+  </div>
+</div>
+
+</body>
+</html>
