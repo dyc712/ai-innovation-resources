@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日财经投资深度日报 · 2026-03-07</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --header-bg: #1a1f2e;
+    --header-text: #e8eaf0;
+    --accent-energy: #e85d04;
+    --accent-geo: #7209b7;
+    --accent-market: #0077b6;
+    --accent-summary: #2b9348;
+    --tag-extreme: #d00000;
+    --tag-high: #e85d04;
+    --tag-mid: #0077b6;
+    --text-primary: #1a1a2e;
+    --text-secondary: #555;
+    --insight-bg: #f0f7ff;
+    --insight-border: #0077b6;
+    --ticker-bg: #0d1117;
+    --ticker-text: #e6edf3;
+    --ticker-up: #3fb950;
+    --ticker-down: #f85149;
+    --warning-bg: #d00000;
+    --warning-text: #fff;
+    --border-radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* === WARNING BANNER === */
+  .warning-banner {
+    background: var(--warning-bg);
+    color: var(--warning-text);
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .warning-banner .pulse {
+    width: 10px; height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    animation: pulse 1.2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  /* === HEADER === */
+  .site-header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 24px 0 16px;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .site-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .site-subtitle {
+    font-size: 12px;
+    color: #8b9ab7;
+    margin-top: 4px;
+  }
+  .date-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: #c9d1e0;
+    white-space: nowrap;
+  }
+
+  /* === TICKER BAR === */
+  .ticker-bar {
+    background: var(--ticker-bg);
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .ticker-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .tick-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 90px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+  }
+  .tick-label { font-size: 10px; color: #8b9ab7; text-transform: uppercase; letter-spacing: 1px; }
+  .tick-price { font-size: 16px; font-weight: 700; color: var(--ticker-text); }
+  .tick-change { font-size: 11px; font-weight: 600; }
+  .up { color: var(--ticker-up); }
+  .down { color: var(--ticker-down); }
+
+  /* === MAIN === */
+  .main-content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+
+  /* === SECTION HEADER === */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e0e3eb;
+  }
+  .section-header .section-icon { font-size: 20px; }
+  .section-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .section-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: #888;
+    background: #eef0f5;
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-weight: 500;
+  }
+
+  /* === CARD === */
+  .card {
+    background: var(--card);
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    margin-bottom: 16px;
+    padding: 18px 20px 16px;
+    border-left: 4px solid #ddd;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+  .card.energy { border-left-color: var(--accent-energy); }
+  .card.geo    { border-left-color: var(--accent-geo); }
+  .card.market { border-left-color: var(--accent-market); }
+  .card.summary { border-left-color: var(--accent-summary); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 200px;
+    line-height: 1.4;
+  }
+  .badge-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+  .badge.extreme { background: #ffeaea; color: var(--tag-extreme); border: 1px solid #ffb3b3; }
+  .badge.high    { background: #fff3e6; color: var(--tag-high);    border: 1px solid #ffc08a; }
+  .badge.mid     { background: #e6f2ff; color: var(--tag-mid);     border: 1px solid #80c0f8; }
+
+  .card-meta {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .card-meta .source-link a { color: #0077b6; text-decoration: none; }
+  .card-meta .source-link a:hover { text-decoration: underline; }
+
+  .card-body {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.65;
+  }
+
+  .insight-block {
+    background: var(--insight-bg);
+    border-left: 3px solid var(--insight-border);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #1a3a5c;
+    line-height: 1.6;
+  }
+  .insight-block .insight-label {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--insight-border);
+    margin-bottom: 4px;
+  }
+
+  .tag-row {
+    margin-top: 10px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 11px;
+    color: #666;
+    background: #f0f1f5;
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  /* === SUMMARY SECTION === */
+  .summary-box {
+    background: var(--card);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--accent-summary);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .summary-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .summary-box ul li {
+    padding: 7px 0;
+    padding-left: 22px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-primary);
+    border-bottom: 1px solid #f0f1f5;
+    line-height: 1.55;
+  }
+  .summary-box ul li:last-child { border-bottom: none; }
+  .summary-box ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-summary);
+    font-size: 12px;
+    top: 9px;
+  }
+
+  /* === DEEP PICK === */
+  .deep-pick {
+    background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+    border-radius: var(--border-radius);
+    padding: 22px 24px;
+    color: #e8eaf0;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .deep-pick::before {
+    content: '⭐';
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    font-size: 28px;
+    opacity: 0.18;
+  }
+  .deep-pick .pick-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #f0c040;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .deep-pick .pick-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .deep-pick .pick-reason {
+    font-size: 13.5px;
+    color: #b0b8cc;
+    line-height: 1.65;
+  }
+  .deep-pick .pick-reason a { color: #60b0ff; text-decoration: none; }
+
+  /* === FOOTER === */
+  .site-footer {
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 11px;
+    color: #aaa;
+    border-top: 1px solid #e0e3eb;
+    margin-top: 20px;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    .tick-item { min-width: 70px; }
+    .card-header { flex-direction: column; }
+    .badge-row { justify-content: flex-start; }
+    .header-top { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ⚠️ 极端风险警告横幅 -->
+<div class="warning-banner">
+  <div class="pulse"></div>
+  ⚠️ 极端风险警告：伊朗军事冲突激化 · 霍尔木兹海峡威胁升级 · WTI原油单周暴涨$25/桶（史上最大周涨幅）· 本周已进入冲突第5天
+  <div class="pulse"></div>
+</div>
+
+<!-- 顶部标题区 -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="site-title">📊 每日财经投资深度日报</div>
+        <div class="site-subtitle">为资深投资人生成 · 以影响深远程度为筛选标准 · 非热度驱动</div>
+      </div>
+      <div class="date-badge">2026 年 3 月 7 日（周六）· 08:00 CST</div>
+    </div>
+  </div>
+
+  <!-- 关键数据栏 -->
+  <div class="ticker-bar">
+    <div class="ticker-inner">
+      <div class="tick-item">
+        <div class="tick-label">WTI 原油</div>
+        <div class="tick-price">$90.90</div>
+        <div class="tick-change up">▲ +12.2%</div>
+      </div>
+      <div class="tick-item">
+        <div class="tick-label">布伦特</div>
+        <div class="tick-price">$92.69</div>
+        <div class="tick-change up">▲ +8.5%</div>
+      </div>
+      <div class="tick-item">
+        <div class="tick-label">天然气</div>
+        <div class="tick-price">$3.19</div>
+        <div class="tick-change up">▲ +6.1%</div>
+      </div>
+      <div class="tick-item">
+        <div class="tick-label">黄金</div>
+        <div class="tick-price">▲</div>
+        <div class="tick-change up">收涨（避险）</div>
+      </div>
+      <div class="tick-item">
+        <div class="tick-label">美元指数</div>
+        <div class="tick-price">↓</div>
+        <div class="tick-change down">NFP拖累走弱</div>
+      </div>
+      <div class="tick-item">
+        <div class="tick-label">美股指数</div>
+        <div class="tick-price">↓↓</div>
+        <div class="tick-change down">全线重挫</div>
+      </div>
+      <div class="tick-item">
+        <div class="tick-label">美债10Y</div>
+        <div class="tick-price">震荡</div>
+        <div class="tick-change" style="color:#c9d1e0;">收益率曲线陡化</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 主内容 -->
+<main class="main-content">
+
+  <!-- ===== 板块一：能源与大宗商品 ===== -->
+  <div class="section-header">
+    <span class="section-icon">🔥</span>
+    <h2>能源与大宗商品</h2>
+    <span class="section-count">3 条</span>
+  </div>
+
+  <!-- 条目1 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">WTI原油单周暴涨$25/bbl，创史上最大周度涨幅——霍尔木兹冲突进入第5天</div>
+      <div class="badge-row">
+        <span class="badge extreme">极高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-07（周五收盘数据）</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/equities-dollar-hit-nfp-miss-while-oil-ends-record-breaking-week-newsquawk-us-market-wrap" target="_blank">ZeroHedge / Newsquawk</a></span>
+    </div>
+    <div class="card-body">
+      随着伊朗与美国军事冲突升温，WTI原油本周从约$66/bbl暴涨至$90.90/bbl，单周涨幅约$25/bbl，为有史以来最大周度涨幅。布伦特达$92.69，天然气同步上涨6.1%。伊朗已攻击科威特附近一艘美国拥有的油轮，科威特开始削减部分油田产量。冲突目前进入第5天，霍尔木兹海峡封锁风险持续上升，占全球约20%石油流量（约1800万桶/日）处于威胁之下。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      直接受益：XOM、CVX、OXY、SLB等美国能源股；航运保险板块（保费暴涨）；中东以外炼油商（美湾、欧洲）。 受损方：净进口国（印度、日本、韩国、台湾、欧洲工业）；航运物流（苏伊士/替代路线运费飙升）；全球通胀二次抬头风险。 关键跟踪信号：霍尔木兹是否出现实质性封锁；ICE裂解价差（gasoil crack spread）是否突破$45/桶；周末外交动向。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#能源</span>
+      <span class="tag">#大宗商品</span>
+      <span class="tag">#地缘</span>
+    </div>
+  </div>
+
+  <!-- 条目2 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">摩根大通霍尔木兹封锁推演：第3天进入商品混沌，第18天缺口升至4.7mbd</div>
+      <div class="badge-row">
+        <span class="badge extreme">极高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/jpmorgans-new-hormuz-closure-math-just-3-days-until-total-commodity-chaos" target="_blank">ZeroHedge（JPMorgan分析摘要）</a></span>
+    </div>
+    <div class="card-body">
+      摩根大通最新测算：若霍尔木兹实质封锁，第8天全球原油供应缺口约330万桶/日，第15天升至380万桶/日，第18天达470万桶/日。目前已进入第5天。封锁的下游危机不仅在"原油运不走"，更在炼油商原料断供导致成品油（汽油、柴油、航煤）产能崩溃，这是全球更难对冲的系统性风险。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      若持续到第10天以上，全球炼油商面临原料断档风险，成品油价格将非线性上涨。中国从霍尔木兹进口日均约450万桶；印度依赖度更高。关注中国谈判"安全通道"进展（已有报道称中方正协商）。布伦特$100关口将触发全球多国通胀紧急响应。持仓建议：WTI多头、成品油期货多头；中国炼油商（估值随原油上涨压缩）需小心。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#能源</span>
+      <span class="tag">#大宗商品</span>
+      <span class="tag">#地缘</span>
+    </div>
+  </div>
+
+  <!-- 条目3 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">油价冲击与黄金历史规律：1973、1979、1991、2022四次油价冲击均推升黄金</div>
+      <div class="badge-row">
+        <span class="badge high">高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/fog-oil" target="_blank">ZeroHedge（VonGreyerz.gold 作者分析）</a></span>
+    </div>
+    <div class="card-body">
+      历史数据：1973年OPEC石油禁运，金价12个月内从$90涨至$180；1979年伊朗革命，金价从$220冲至$850；1991年海湾战争，金价数周内涨10%；2022年乌克兰战争，油价冲$130同时金价突破$2050关键阻力位。分析认为此次美伊冲突具备三重叠加驱动：地缘冲击+美元信用走弱+央行去美元化持续加速。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      黄金当前处于历史性有利环境：能源冲击（通胀预期↑）+ NFP超预期疲软（降息预期↑）+ 美元走弱三重共振。GLD、GDX等ETF；实物黄金；白银（SLV）同步受益。关注$2500/oz是否成为新支撑位；矿企对冲比例（未对冲矿企弹性更大）。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#大宗商品</span>
+      <span class="tag">#能源</span>
+      <span class="tag">#宏观政策</span>
+    </div>
+  </div>
+
+
+  <!-- ===== 板块二：地缘与宏观博弈 ===== -->
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <h2>地缘与宏观博弈</h2>
+    <span class="section-count">4 条</span>
+  </div>
+
+  <!-- 条目4 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">美国2月非农就业暴跌92,000——六西格玛级别偏离，私人就业-86K，失业率升至4.4%</div>
+      <div class="badge-row">
+        <span class="badge extreme">极高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06 21:30 UTC（发布）</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/jobs-shock-us-lost-92k-payrolls-february-unemployment-rate-rises" target="_blank">ZeroHedge / BLS</a></span>
+    </div>
+    <div class="card-body">
+      美国2月非农新增就业-92,000（预期+59K，前值+126K），为2020年以来第二差数据，偏离预期达6个标准差，低于市场最悲观预估83,000。私人就业-86,000（预期+60K）。失业率升至4.44%（预期4.3%）。工资环比+0.4%（预期+0.3%），薪资增速反而加速。12月非农被大幅下修至-17,000（原+48K），2个月合计下修-69K。此组合——就业崩溃+薪资粘性——构成典型滞胀数据。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      美联储陷入两难：就业走弱支持降息，但薪资粘性+油价暴涨将推升通胀，美联储鹰鸽裂痕加深（3月18日FOMC会议将更新点阵图）。美元指数短期走弱（已应验）；美债收益率曲线陡化；美股科技股承压（估值压缩+滞胀恐慌）。3月18日FOMC为核心观察窗口，届时需重新定价降息路径。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#宏观政策</span>
+      <span class="tag">#资金流向</span>
+    </div>
+  </div>
+
+  <!-- 条目5 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">特朗普宣布对伊朗"无条件投降才谈"，同时授予临时30天豁免允许俄油流向印度</div>
+      <div class="badge-row">
+        <span class="badge extreme">极高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/equities-dollar-hit-nfp-miss-while-oil-ends-record-breaking-week-newsquawk-us-market-wrap" target="_blank">ZeroHedge / Newsquawk</a></span>
+    </div>
+    <div class="card-body">
+      特朗普表示对伊朗没有任何谈判空间，除非"无条件投降"，这实质上切断了短期外交解决路径。同时美国财政部暂时给予30天豁免，允许滞留海上的俄罗斯原油流向印度。据报道，特朗普政府已排除动用财政部直接干预原油期货市场的选项（认为效果有限）。中国正在与各方谈判确保其船只安全通过霍尔木兹。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      "无条件投降"表述意味着冲突将持续更长时间，这是油价维持高位的核心逻辑。俄油豁免短期利好印度炼油商（RELIANCE.NS）。若中国谈判成功获取"安全通道"，可能短暂压低原油期货升水，但结构性供给威胁未除。密切关注：是否有第三方（欧盟/土耳其/卡塔尔）介入调停。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#地缘</span>
+      <span class="tag">#能源</span>
+      <span class="tag">#宏观政策</span>
+    </div>
+  </div>
+
+  <!-- 条目6 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">中国逼近500架波音订单，特朗普将于3月31日-4月2日访华——能源压力下的贸易筹码交换</div>
+      <div class="badge-row">
+        <span class="badge high">高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/did-trump-force-chinas-hand-beijing-nears-500-jet-boeing-deal-ahead-xi-summit" target="_blank">ZeroHedge / Bloomberg</a></span>
+    </div>
+    <div class="card-body">
+      据Bloomberg消息人士，中国正接近一笔约500架波音飞机大订单（含737 MAX + 约100架787梦想客机/777X），可能在特朗普3月31日至4月2日访华期间公布。美方要求确定性承诺而非单纯数字。分析认为，这是北京在被切断廉价原油来源（伊朗+委内瑞拉渠道）的压力下，主动换取贸易缓和的战略举措。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      波音（BA）已上涨约2%，若订单落地将是近年来最大航空订单，对BA估值及现金流改善意义重大。更深层含义：美中贸易战可能在能源危机背景下出现意外缓和窗口，对苹果（AAPL）、半导体（应用材料AMAT等）供应链有潜在正向影响。但谈判可能再度"被搁置"——Bloomberg指出双方已谈崩过多次。跟踪3月31日峰会进展。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#地缘</span>
+      <span class="tag">#并购重组</span>
+      <span class="tag">#行业结构</span>
+    </div>
+  </div>
+
+  <!-- 条目7 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">美国1月零售销售-0.2% MoM，弱于预期但控制组+0.3%，数据被恶劣天气扭曲</div>
+      <div class="badge-row">
+        <span class="badge mid">中</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/us-retail-sales-dropped-january-weather-weak-gas-prices-weigh" target="_blank">ZeroHedge / Census Bureau</a></span>
+    </div>
+    <div class="card-body">
+      美国1月零售销售环比-0.2%（预期-0.2%，略好于BofA预期的更大跌幅），同比+3.2%。主要拖累：加油站（低油价）、医疗保健、汽车。网络零售商大幅上涨。控制组（剔除汽车、加油站、建材、餐饮）+0.3%，好于预期，支撑Q1 GDP预测。值得注意：数据仍滞后（反映1月）且受极寒天气严重干扰，实际消费健康度存疑。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      短期：零售数据支撑美联储"等待"立场。但与非农数据叠加，构成软数据趋势走弱的组合。中期：若高油价在2月-3月传导至零售端（加油站支出大幅增加、实际可支配收入被压缩），消费类股（XRT、AMZN、WMT）的盈利预期可能在Q1财报季承压。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#宏观政策</span>
+    </div>
+  </div>
+
+
+  <!-- ===== 板块三：市场结构与机构动向 ===== -->
+  <div class="section-header">
+    <span class="section-icon">📈</span>
+    <h2>市场结构与机构动向</h2>
+    <span class="section-count">3 条</span>
+  </div>
+
+  <!-- 条目8 -->
+  <div class="card market">
+    <div class="card-header">
+      <div class="card-title">贝莱德（BLK）冻结260亿美元私人信贷基金赎回——私人信贷"火灾出售"开始</div>
+      <div class="badge-row">
+        <span class="badge extreme">极高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/private-credit-firesale-begins-worlds-largest-asset-manager-gates-investors-26-billion-fund" target="_blank">ZeroHedge（paywall摘要）</a></span>
+    </div>
+    <div class="card-body">
+      全球最大资产管理公司贝莱德（BLK）已对其260亿美元规模私人信贷基金实施提款限制（"gating"），原因是赎回请求激增。这正是Blue Owl和黑石（Blackstone）此前竭力避免的情形。与此同时，WAL（西方联合银行）被JEF（杰富瑞）通知约定付款违约，显示私人信贷压力已出现链式传导。黄金和美债作为避险资产成为资金流入目的地。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      私人信贷是过去5年最大的"影子流动性"来源，若出现大规模赎回潮：上市私人信贷机构（ARCC、BXSL、OBDC）将承压；银行对私人信贷敞口大的中小金融机构面临连带风险。同时，这是一个警示信号：流动性危机可能从"私人"蔓延至"公开"市场。关注高收益债信用利差（HYG、JNK）是否扩张。这是真正值得密切追踪的系统性风险点。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#资金流向</span>
+      <span class="tag">#行业结构</span>
+      <span class="tag">#宏观政策</span>
+    </div>
+  </div>
+
+  <!-- 条目9 -->
+  <div class="card market">
+    <div class="card-header">
+      <div class="card-title">伯克希尔新CEO格雷格·阿贝尔承诺将全部税后薪酬用于增持BRK股票，已购1530万美元</div>
+      <div class="badge-row">
+        <span class="badge high">高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-05~06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/berkshire-ceo-greg-abel-commits-salary-buying-company-stock" target="_blank">ZeroHedge / Bloomberg</a></span>
+    </div>
+    <div class="card-body">
+      伯克希尔哈撒韦新任CEO格雷格·阿贝尔公开承诺，将其全部税后薪酬持续买入BRK股票，并已购入约1530万美元。伯克希尔同步重启股票回购计划（已停止6个季度），理由是管理层认为股价低于内在价值。公司持有约3730亿美元现金储备，回购不影响其他并购和股权投资决策。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      阿贝尔此举是"与股东利益绝对绑定"的强力信号，而非单纯公关动作。BRK.B在当前市场波动环境下可作为防御性持仓：拥有巨额现金储备可在危机中低价抄底；能源业务（西方石油OXY等持股）受益于油价上涨；保险业务逆周期特性。若市场出现系统性下跌，BRK将是"坐拥弹药等待抄底"的最佳载体之一。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#资金流向</span>
+      <span class="tag">#并购重组</span>
+    </div>
+  </div>
+
+  <!-- 条目10 -->
+  <div class="card market">
+    <div class="card-header">
+      <div class="card-title">BLS统计"幽灵"：250万美国本土就业被悄然修订消失——特朗普"就业成就"系统性虚构</div>
+      <div class="badge-row">
+        <span class="badge high">高</span>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 2026-03-06</span>
+      <span class="source-link">来源：<a href="https://www.zerohedge.com/markets/it-was-all-mirage-25-million-native-born-us-workers-were-just-revised-away" target="_blank">ZeroHedge</a></span>
+    </div>
+    <div class="card-body">
+      本次BLS年度普查人口修订将美国本土出生劳动者就业人数一次性下修250万人，使其回到2019年水平。这意味着特朗普执政以来宣扬的"本土就业替代外来移民"核心叙事从数据层面完全崩塌。劳动力参与率同步下修至62.0%（预期62.5%），就业-人口比下修0.47个百分点。统计口径从"Biden时代虚增"到"Trump政绩虚报"，数据质量的持续性恶化值得高度警惕。
+    </div>
+    <div class="insight-block">
+      <div class="insight-label">💡 投资含义</div>
+      对市场的深远影响：美国实际就业底盘比任何人想象的都要脆弱。这实质上将进一步强化降息预期（但被油价通胀对冲）。宏观数据的可信度危机可能加速资金流向"硬资产"（黄金、实物大宗商品、比特币）。此信号是隐性的通缩+通胀同步风险（Biflation）信号，对风险资产不利，对实物资产长期有利。
+    </div>
+    <div class="tag-row">
+      <span class="tag">#宏观政策</span>
+      <span class="tag">#资金流向</span>
+    </div>
+  </div>
+
+
+  <!-- ===== 板块四：今日执行摘要 ===== -->
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <h2>今日执行摘要</h2>
+    <span class="section-count">投资人最需要知道的事</span>
+  </div>
+
+  <div class="summary-box">
+    <ul>
+      <li>🔴 <strong>霍尔木兹危机进入第5天</strong>，WTI创史上最大周涨幅（+$25/bbl），布伦特触$92.69。特朗普"无条件投降"立场关闭外交窗口，冲突延续将支撑原油继续上行。若10天内无外交突破，布伦特向$100迈进概率极高。</li>
+      <li>🔴 <strong>2月非农-92K，六西格玛级暴跌</strong>，失业率升至4.44%，但薪资反加速至0.4%/月。滞胀组合数据令美联储极度被动，3月18日FOMC将是关键——届时更新点阵图，高度关注利率路径重新定价。</li>
+      <li>🟠 <strong>贝莱德260亿私人信贷基金冻结赎回</strong>——这是私人信贷市场潜在流动性危机的早期信号，历史上此类事件往往比表面看起来更具传染性。密切关注HYG/JNK信用利差。</li>
+      <li>🟠 <strong>油价-黄金历史共振规律显著</strong>：四次重大油价冲击（1973/1979/1991/2022）均推升黄金大幅上涨。当前油价+薪资粘性+美元走弱三重共振，黄金处于极佳战略布局窗口。</li>
+      <li>🟡 <strong>中国谈判霍尔木兹安全通道</strong>：若成功，可短暂缓解原油升水，但无改结构性供给威胁。另外500架波音订单谈判是中国在能源压力下换取贸易缓和的战略筹码，可能重塑3月底特朗普访华预期。</li>
+      <li>🟡 <strong>BLS数据质量危机：250万就业"幽灵"被修订消失</strong>，美国实际劳动市场比数据显示的更脆弱。长期看，宏观数据不可信将加速全球资金向硬资产迁移。</li>
+      <li>🟢 <strong>伯克希尔重启回购+阿贝尔个人重金增持</strong>：BRK.B在动荡市场中是兼具能源业务受益（OXY持股）+巨额现金抄底能力的稀缺组合，可作为本周末市场大幅波动的防御性配置。</li>
+    </ul>
+  </div>
+
+
+  <!-- ===== 板块五：今日深度精选 ===== -->
+  <div class="section-header">
+    <span class="section-icon">⭐</span>
+    <h2>今日深度精选</h2>
+    <span class="section-count">最值得深读的一条</span>
+  </div>
+
+  <div class="deep-pick">
+    <div class="pick-label">⭐ 今日深度精选</div>
+    <div class="pick-title">
+      贝莱德260亿私人信贷基金"闸门关闭"——被低估的系统性连锁反应信号
+    </div>
+    <div class="pick-reason">
+      <strong>为什么今天最值得深读这条？</strong><br><br>
+      当所有人的目光都集中在霍尔木兹油价和非农数据时，贝莱德私人信贷基金冻结赎回这条消息悄然滑过大多数投资人的雷达——而这恰恰可能是本周最具长期影响力的事件。<br><br>
+      过去5年，私人信贷市场从不到1万亿膨胀至超过2.5万亿美元，成为低利率时代最受机构追捧的"类固收替代"资产。其核心风险在于：底层资产流动性极差，但产品本身包装成了半流动性。当赎回潮来临，管理人只有两个选择——要么折价抛售底层资产（引发连锁抛压），要么关闸（触发投资者恐慌）。贝莱德选择了后者。<br><br>
+      历史上，类似闸门事件（2008年次贷基金、2016年英国商业地产基金）无一不是更大流动性危机的前兆。本次叠加高油价通胀+就业数据崩塌+美联储两难，系统性风险共振的条件比任何单一事件都更充分。<br><br>
+      深读建议：<a href="https://www.zerohedge.com/markets/private-credit-firesale-begins-worlds-largest-asset-manager-gates-investors-26-billion-fund" target="_blank">ZeroHedge原文摘要</a>；延伸关注Blue Owl（OWL）、黑石私人信贷基金（BCRED）、应收账款支持证券（ABS）利差动向；以及WAL（西方联合银行）与JEF之间违约事件的后续进展——这是目前公开信息中最值得深挖的细节。
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:10px; font-size:12px; color:#aaa;">
+    今日共收录 <strong>10条</strong> · 能源大宗 3条 · 地缘宏观 4条 · 市场结构 3条
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  📊 每日财经投资深度日报 · 2026-03-07 · 信息源：ZeroHedge / Newsquawk / OilPrice.com / Bloomberg（摘引）/ BLS<br>
+  本报告仅供参考，不构成投资建议。时间窗口：2026-03-06 08:00 ~ 2026-03-07 08:00 CST
+</footer>
+
+</body>
+</html>
