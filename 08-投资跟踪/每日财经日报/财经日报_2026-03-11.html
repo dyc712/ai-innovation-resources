@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日财经投资深度日报 — 2026-03-11</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card-bg: #ffffff;
+    --header-bg: #0f1117;
+    --accent-energy: #e05c2d;
+    --accent-geo: #3d6fd4;
+    --accent-market: #2da87f;
+    --tag-high: #e53935;
+    --tag-medium-high: #fb8c00;
+    --tag-medium: #1976d2;
+    --implication-bg: #f0f7ff;
+    --implication-border: #90caf9;
+    --text-main: #1a1a2e;
+    --text-secondary: #555;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-hover: 0 4px 18px rgba(0,0,0,0.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif; color: var(--text-main); line-height: 1.65; }
+
+  /* ===== ALERT BANNER ===== */
+  .alert-banner {
+    background: linear-gradient(90deg, #b71c1c, #e53935);
+    color: #fff;
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .alert-banner span.pulse { display: inline-block; width: 10px; height: 10px; background: #fff; border-radius: 50%; animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
+
+  /* ===== HEADER ===== */
+  header {
+    background: var(--header-bg);
+    padding: 28px 5% 22px;
+    color: #fff;
+  }
+  .header-top { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .header-title { font-size: 22px; font-weight: 800; letter-spacing: 0.02em; }
+  .header-subtitle { font-size: 13px; color: #aaa; margin-top: 4px; }
+  .header-date { font-size: 13px; color: #aaa; white-space: nowrap; }
+
+  /* ===== MARKET DATA BAR ===== */
+  .data-bar {
+    background: #1a1d2e;
+    padding: 14px 5%;
+    display: flex; flex-wrap: wrap; gap: 18px;
+    border-bottom: 1px solid #2a2d3e;
+  }
+  .data-item { display: flex; flex-direction: column; min-width: 110px; }
+  .data-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+  .data-value { font-size: 17px; font-weight: 700; color: #fff; margin-top: 2px; }
+  .data-change { font-size: 12px; margin-top: 1px; }
+  .up { color: #4caf50; }
+  .down { color: #ef5350; }
+
+  /* ===== MAIN LAYOUT ===== */
+  main { max-width: 980px; margin: 0 auto; padding: 32px 5% 60px; }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin: 36px 0 16px;
+  }
+  .section-icon { font-size: 22px; }
+  .section-title { font-size: 18px; font-weight: 800; color: var(--text-main); }
+  .section-count { font-size: 12px; color: #fff; background: #555; border-radius: 20px; padding: 2px 9px; font-weight: 600; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px 22px 18px 26px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+    position: relative;
+    border-left: 5px solid #ccc;
+  }
+  .card:hover { box-shadow: var(--shadow-hover); }
+  .card.energy { border-left-color: var(--accent-energy); }
+  .card.geo { border-left-color: var(--accent-geo); }
+  .card.market { border-left-color: var(--accent-market); }
+
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text-main); flex: 1; min-width: 200px; line-height: 1.4; }
+  .card-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex-shrink: 0; }
+
+  .badge {
+    font-size: 11px; font-weight: 700; border-radius: 4px; padding: 3px 8px; white-space: nowrap;
+  }
+  .badge.extreme { background: #ffebee; color: var(--tag-high); border: 1px solid #ef9a9a; }
+  .badge.high { background: #fff3e0; color: var(--tag-medium-high); border: 1px solid #ffcc80; }
+  .badge.medium { background: #e3f2fd; color: var(--tag-medium); border: 1px solid #90caf9; }
+
+  .tag-chip {
+    font-size: 11px; background: #f0f0f0; color: #555; border-radius: 4px; padding: 2px 7px;
+  }
+
+  .card-time { font-size: 12px; color: #999; }
+
+  .card-body { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+
+  .implication-box {
+    background: var(--implication-bg);
+    border-left: 3px solid var(--implication-border);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #1a3a6e;
+    margin-top: 10px;
+  }
+  .implication-label { font-weight: 700; font-size: 12px; letter-spacing: 0.04em; margin-bottom: 4px; color: #1565c0; }
+
+  .source-link { font-size: 12px; color: #999; margin-top: 10px; }
+  .source-link a { color: #1976d2; text-decoration: none; }
+  .source-link a:hover { text-decoration: underline; }
+
+  /* ===== SUMMARY SECTION ===== */
+  .summary-section {
+    background: linear-gradient(135deg, #0f1117 0%, #1a1d2e 100%);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 36px 0 24px;
+    color: #fff;
+  }
+  .summary-title { font-size: 17px; font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .summary-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.6; }
+  .bullet-dot { width: 8px; height: 8px; min-width: 8px; background: #f9a825; border-radius: 50%; margin-top: 6px; }
+
+  /* ===== DEEP PICK ===== */
+  .deep-pick {
+    background: #fff;
+    border: 2px solid #f9a825;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 20px;
+  }
+  .deep-pick-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .deep-pick-label { font-size: 13px; font-weight: 800; background: #f9a825; color: #333; border-radius: 6px; padding: 3px 10px; }
+  .deep-pick-title { font-size: 16px; font-weight: 700; }
+  .deep-pick-body { font-size: 14px; color: #444; line-height: 1.7; }
+
+  /* ===== FOOTER ===== */
+  footer { text-align: center; font-size: 12px; color: #aaa; padding: 24px 0 40px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .data-bar { gap: 14px; }
+    .data-item { min-width: 90px; }
+    .card { padding: 16px 16px 14px 20px; }
+    .summary-section { padding: 22px 18px; }
+    .deep-pick { padding: 18px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ⚠️ EXTREME RISK ALERT -->
+<div class="alert-banner">
+  <span class="pulse"></span>
+  ⚠️ 极端风险警报：伊朗开始在霍尔木兹海峡布设水雷 — 全球约20%原油及LNG出口通道面临中断风险，能源市场处于历史性危机状态
+  <span class="pulse"></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div>
+      <div class="header-title">📊 每日财经投资深度日报</div>
+      <div class="header-subtitle">为资深投资人定制 · 以趋势影响为唯一筛选标准</div>
+    </div>
+    <div class="header-date">2026年03月11日 · 08:00 CST</div>
+  </div>
+</header>
+
+<!-- MARKET DATA BAR -->
+<div class="data-bar">
+  <div class="data-item">
+    <div class="data-label">Brent Crude</div>
+    <div class="data-value">~$94</div>
+    <div class="data-change up">↑ +50% YTD · 最高近$120</div>
+  </div>
+  <div class="data-item">
+    <div class="data-label">WTI</div>
+    <div class="data-value">$90+</div>
+    <div class="data-change up">↑ 周内大幅波动</div>
+  </div>
+  <div class="data-item">
+    <div class="data-label">Jet Fuel (Gulf Coast)</div>
+    <div class="data-value">$3.82/gal</div>
+    <div class="data-change up">↑ 逼近$4触发阈值</div>
+  </div>
+  <div class="data-item">
+    <div class="data-label">LNG Spot (亚洲)</div>
+    <div class="data-value">三年高位</div>
+    <div class="data-change up">↑ 卡塔尔停产+霍尔木兹</div>
+  </div>
+  <div class="data-item">
+    <div class="data-label">US 3Y Treasury</div>
+    <div class="data-value">3.579%</div>
+    <div class="data-change down">↓ 标售疲软 最大尾差</div>
+  </div>
+  <div class="data-item">
+    <div class="data-label">EIA 2026 Brent预测</div>
+    <div class="data-value">$79</div>
+    <div class="data-change up">↑ 上调自$58（一个月前）</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- ===== SECTION 1: 能源与大宗商品 ===== -->
+  <div class="section-header">
+    <span class="section-icon">🔥</span>
+    <span class="section-title">能源与大宗商品</span>
+    <span class="section-count">5条</span>
+  </div>
+
+  <!-- Card 1 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">伊朗开始在霍尔木兹海峡布设水雷，数十枚已到位，IRGC仍保有80-90%布雷能力</div>
+      <div class="card-meta">
+        <span class="badge extreme">极高</span>
+        <span class="tag-chip">#能源</span>
+        <span class="tag-chip">#地缘</span>
+        <span class="tag-chip">#大宗商品</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 14:37 UTC · OilPrice.com</div>
+    <div class="card-body">
+      伊朗已在霍尔木兹海峡开始部署海底水雷，目前数十枚已到位，依据美国情报来源。伊斯兰革命卫队（IRGC）与正规海军共同控制海峡，仍持有大量布雷船只及岸基导弹，理论上可扩展至数百枚水雷。美国白宫确认海军尚未护航任何油轮过境，能源部长赖特发布"已护航"帖文后随即删除，局势引发原油价格剧烈波动（消息传出后油价一度暴跌近10美元后反弹）。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      这是本轮能源危机最核心的事件升级节点。水雷部署将扫雷行动复杂化，时间轴大幅延长。<br>
+      <strong>受益：</strong>上游石油公司（CVX、XOM、COP）、能源ETF（XLE）、油轮替代航线受益港口（沙特阿美东西管道终点）；黄金/比特币等避险资产。<br>
+      <strong>受损：</strong>航运保险商、所有依赖波斯湾进口的亚洲炼厂、日韩台新能源进口国。<br>
+      <strong>关键跟踪信号：</strong>美军扫雷行动启动时间、霍尔木兹通行谈判进展。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html</a></div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">中东海湾产油国联合削减产量超500万桶/日：沙特250万、伊拉克290万、UAE+科威特各50-80万</div>
+      <div class="card-meta">
+        <span class="badge extreme">极高</span>
+        <span class="tag-chip">#能源</span>
+        <span class="tag-chip">#大宗商品</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 05:31 UTC · OilPrice.com / Bloomberg</div>
+    <div class="card-body">
+      霍尔木兹海峡实际封堵导致储罐填满、原油无法出口，沙特、伊拉克、UAE、科威特被迫上游停产。沙特已关闭至少2个油田，总减产约2-2.5百万桶/日。沙特东西管道可绕行红海，但管道容量仅为封锁前霍尔木兹流量的极小部分。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      供应端破坏是结构性的，非短期波动。全球净损失超5百万桶/日相当于2022年俄乌冲击量级的2-3倍。<br>
+      <strong>受益：</strong>美国页岩油生产商（EIA预测美国2026年产量上调至13.6 mb/d）、非中东油气资产、挪威海上油气、巴西国家石油（Petrobras）。<br>
+      <strong>受损：</strong>全球炼厂利润率在供给恢复后可能大幅逆转；短期内炼厂惜产惜库存。<br>
+      <strong>关键信号：</strong>沙特Aramco公开财报和实产数据更新。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Gulf-Producers-Slash-Oil-Output-by-5-Million-Bpd.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/Gulf-Producers-Slash-Oil-Output-by-5-Million-Bpd.html</a></div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">EIA大幅上调布伦特油价预测：2026年均价$79（前月预测$58），布雷克文险失守$100</div>
+      <div class="card-meta">
+        <span class="badge extreme">极高</span>
+        <span class="tag-chip">#能源</span>
+        <span class="tag-chip">#宏观政策</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 12:02 UTC · EIA STEO / OilPrice.com</div>
+    <div class="card-body">
+      美国EIA在最新月度短期能源展望（STEO）中，将2026年布伦特原油均价预测从$58/桶上调至$79/桶（+36%），2027年从$53上调至$64。报告以霍尔木兹海峡危机为核心假设，同时上调美国产量预测至13.6 mb/d（2026）和13.8 mb/d（2027）。EIA明确警告：若中断持续超预期，实际价格轨迹可能远高于基准预测。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      官方预测机构上调幅度高达36%，是对投资级决策的重要信号。<br>
+      <strong>受益：</strong>持仓油气资产的多头头寸，能源板块估值重估；美国页岩油开发商资本开支受益。<br>
+      <strong>受损：</strong>高通胀路径下，成长股/高估值科技股折现率压力上升；联储降息预期延迟。<br>
+      <strong>关键跟踪：</strong>IEA下一步是否启动SPR释放（会议结束未做决定，见下条）。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Shock-Lifts-EIA-Price-Outlook-as-Hormuz-Crisis-Reshapes-Forecast.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/Oil-Shock-Lifts-EIA-Price-Outlook-as-Hormuz-Crisis-Reshapes-Forecast.html</a></div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">亚欧争夺现货LNG：卡塔尔停产+霍尔木兹封锁，印度、孟加拉现货标购颗粒无收</div>
+      <div class="card-meta">
+        <span class="badge extreme">极高</span>
+        <span class="tag-chip">#能源</span>
+        <span class="tag-chip">#地缘</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 08:04 UTC · OilPrice.com / Bloomberg</div>
+    <div class="card-body">
+      卡塔尔宣布拉斯拉凡（全球最大液化设施）停产并发布不可抗力后，全球约20%的LNG供应中断。亚洲现货市场出现"零成交"：印度GAIL、GSPC招标无果，孟加拉以明显高于1月水平成交。欧洲与亚洲争抢同一批灵活目的地船货，价格飙升至三年高位。南韩、台湾、新加坡（天然气占电力25%+）风险最高，若卡塔尔供应不复苏，其现货敞口将大幅扩大。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      <strong>受益：</strong>美国LNG出口商（LNG、FSLR供应商）、澳大利亚LNG项目（Woodside、Santos）、再气化基础设施商；欧洲TTF气价期货看涨。<br>
+      <strong>受损：</strong>韩国、台湾、新加坡电力/公用事业成本骤升，输入性通胀压力显著。<br>
+      <strong>结构性影响：</strong>此次危机将加速全球LNG供应多元化投资（非中东来源项目估值重估）。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Europe-and-Asia-Battle-for-Critical-Spot-LNG-Supply.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/Europe-and-Asia-Battle-for-Critical-Spot-LNG-Supply.html</a></div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="card energy">
+    <div class="card-header">
+      <div class="card-title">中国1-2月原油进口暴增15.8%，日均11.99 mb/d创历史新高，持续战略储备赋予供应缓冲优势</div>
+      <div class="card-meta">
+        <span class="badge high">高</span>
+        <span class="tag-chip">#能源</span>
+        <span class="tag-chip">#宏观政策</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 03:26 UTC · OilPrice.com / Reuters</div>
+    <div class="card-body">
+      中国海关总署数据：2026年1-2月原油进口日均11.99百万桶，同比+15.8%，高于2025年全年均值11.55百万桶/日。年初持续储备约1百万桶/日的战略囤积行为，现使中国面对霍尔木兹危机时拥有比其他进口国更强的缓冲能力。俄油进口（因印度削减采购）近翻倍，但美国已向印度发放临时豁免（至4月4日），或使印度回抢相同俄油资源。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      中国战略储备优势 = 短期需求端可压抑（无需立即高价抢购现货），对现货市场价格有压制效应。<br>
+      <strong>关注：</strong>若中国入市抢购俄油（与印度竞争），将进一步推高俄油折扣收窄，影响Urals定价；中国炼厂股短期受益于低原材料成本优势。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/China-Boosted-Oil-Imports-Nearly-16-in-Early-2026.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/China-Boosted-Oil-Imports-Nearly-16-in-Early-2026.html</a></div>
+  </div>
+
+
+  <!-- ===== SECTION 2: 地缘与宏观博弈 ===== -->
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <span class="section-title">地缘与宏观博弈</span>
+    <span class="section-count">3条</span>
+  </div>
+
+  <!-- Card 6 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">IEA召集G7能源部长紧急会议，战略储备释放讨论以"无决定"结束，持有12亿桶公共储备</div>
+      <div class="card-meta">
+        <span class="badge extreme">极高</span>
+        <span class="tag-chip">#宏观政策</span>
+        <span class="tag-chip">#能源</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 13:07 UTC · IEA / OilPrice.com</div>
+    <div class="card-body">
+      IEA总干事法提赫·比罗尔在巴黎总部主持G7能源部长紧急会议，讨论释放成员国共1.2亿桶公共紧急储备（+约6亿桶行业义务储备）。会议以"无决定"结束，G7宣布"延迟"释放决策。比罗尔警告"市场条件在过去几天显著恶化"，表示所有选项均在桌面，下一次成员国特别会议随时可能宣布启动释放。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      "无决定"短期对油价偏多：SPR释放预期落空 = 支撑因素减少。<br>
+      <strong>但需警惕：</strong>一旦决定释放，将是近年最大规模政策干预，可在数周内压制油价20-30美元。需跟踪IEA下一次成员国会议日程。<br>
+      <strong>策略建议：</strong>能源多头应关注此"政策尾部风险"，可考虑通过期权构建非对称保护。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/IEA-Mulls-Emergency-Action-To-Unleash-Oil-Reserves.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/IEA-Mulls-Emergency-Action-To-Unleash-Oil-Reserves.html</a></div>
+  </div>
+
+  <!-- Card 7 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">印度最大银行SBI拒绝处理俄油支付——尽管美国已颁发临时豁免令（有效至4月4日）</div>
+      <div class="card-meta">
+        <span class="badge high">高</span>
+        <span class="tag-chip">#宏观政策</span>
+        <span class="tag-chip">#地缘</span>
+        <span class="tag-chip">#资金流向</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 10:21 UTC · OilPrice.com / Bloomberg</div>
+    <div class="card-body">
+      美国OFAC向印度炼厂发放俄油购买豁免（3月5日-4月4日），但印度国家银行（SBI）仍拒绝处理相关支付，因担忧豁免期结束后的合规风险，且其对美国市场敞口高达26%（美国占SBI国际贷款组合最大份额）。约1.3亿桶俄油滞留海上，含2700万桶在阿拉伯海/印度洋。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      金融制裁对实物市场的"影子效应"超越官方豁免本身。<br>
+      <strong>结构信号：</strong>即使豁免存在，银行合规偏好使俄油实际折扣空间无法完全消化，长期压力指向俄罗斯财政收入；中国竞争印度放弃的俄油将进一步压缩折扣。<br>
+      <strong>受益：</strong>非俄替代油气供应商；中国独立炼厂（若成功低价收购滞留俄油）。
+    </div>
+    <div class="source-link">来源：<a href="https://oilprice.com/Latest-Energy-News/World-News/Indias-Top-Bank-Avoids-Russian-Oil-Payments-Despite-US-Sanctions-Waiver.html" target="_blank">https://oilprice.com/Latest-Energy-News/World-News/Indias-Top-Bank-Avoids-Russian-Oil-Payments-Despite-US-Sanctions-Waiver.html</a></div>
+  </div>
+
+  <!-- Card 8 -->
+  <div class="card geo">
+    <div class="card-header">
+      <div class="card-title">美3年期国债拍卖"最差"结果：自Liberation Day以来最大尾差，外资需求低于均值，一级自营商被迫吃入</div>
+      <div class="card-meta">
+        <span class="badge high">高</span>
+        <span class="tag-chip">#宏观政策</span>
+        <span class="tag-chip">#资金流向</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 UTC · ZeroHedge / Treasury Dept</div>
+    <div class="card-body">
+      美国财政部$580亿3年期国债拍卖结果疲软：高收益率3.579%（较上月升6.1bp），尾差1.1bp（自Liberation Day以来最大），Bid-to-Cover仅2.546（8个月低位）。间接竞投人（外资代理）占比59.8%，低于64.3%六次均值；一级自营商被迫持有19.5%，为4月以来最高。本周还有5年及7年期国债将续发，若疲软延续，将是重要预警信号。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      能源冲击叠加国债需求疲软，指向"滞胀"路径概率上升。<br>
+      <strong>ZH评论：</strong>"国债市场尚未充分定价能源冲击的全面影响"。<br>
+      <strong>受损：</strong>长久期债券价格、负债端敏感的保险/退休基金；科技/成长股折现率压力上升。<br>
+      <strong>关键跟踪：</strong>本周5年、7年期拍卖结果；10年期收益率走向是否突破前高。
+    </div>
+    <div class="source-link">来源：<a href="https://www.zerohedge.com/markets/ugly-3y-auction-tails-most-liberation-day-bit-cover-slides" target="_blank">https://www.zerohedge.com/markets/ugly-3y-auction-tails-most-liberation-day-bit-cover-slides</a></div>
+  </div>
+
+
+  <!-- ===== SECTION 3: 市场结构与机构动向 ===== -->
+  <div class="section-header">
+    <span class="section-icon">📈</span>
+    <span class="section-title">市场结构与机构动向</span>
+    <span class="section-count">2条</span>
+  </div>
+
+  <!-- Card 9 -->
+  <div class="card market">
+    <div class="card-header">
+      <div class="card-title">顶级多策略对冲基金上周集体重创：Millennium亏15亿、Citadel -2%、Balyasny -3.5%；原油空头是主因</div>
+      <div class="card-meta">
+        <span class="badge extreme">极高</span>
+        <span class="tag-chip">#资金流向</span>
+        <span class="tag-chip">#行业结构</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 UTC · ZeroHedge / Bloomberg</div>
+    <div class="card-body">
+      全球最大多策略对冲基金集体遭受油价暴涨重创：Millennium损失约15亿美元（全年盈利归零至+0.75%），Citadel Wellington主基金 -2%，Point72 -1.1%，Balyasny -3.5%（其首席大宗商品策略师、前高盛Damien Courvalin随后离职）。背景是2025年末空头原油已是市场最拥挤的共识交易，伊朗战争触发历史性逼空。英国利率押注亦亏损，2年期英债收益率单周飙升35bp。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      <strong>市场结构信号：</strong>头部多策略基金的去杠杆（degrossing）压力将持续。历史先例（2020年3月）显示此类degrossing可能引发"基差交易"崩塌，届时联储可能被迫介入。<br>
+      <strong>受益：</strong>低相关性、高流动性资产（黄金、实物大宗商品）短期相对强势。<br>
+      <strong>风险警示：</strong>若多策略基金集体赎回，可能导致非相关资产被动抛售，放大市场整体波动。
+    </div>
+    <div class="source-link">来源：<a href="https://www.zerohedge.com/markets/worlds-biggest-hedge-funds-millennium-balyasny-citadel-crushed-oil-rollercoaster" target="_blank">https://www.zerohedge.com/markets/worlds-biggest-hedge-funds-millennium-balyasny-citadel-crushed-oil-rollercoaster</a></div>
+  </div>
+
+  <!-- Card 10 -->
+  <div class="card market">
+    <div class="card-header">
+      <div class="card-title">UBS与德银双双警告：美国航空公司"近100%无油价对冲"，喷气燃料$4+将使AAL等陷入Q2亏损</div>
+      <div class="card-meta">
+        <span class="badge high">高</span>
+        <span class="tag-chip">#行业结构</span>
+        <span class="tag-chip">#资金流向</span>
+      </div>
+    </div>
+    <div class="card-time">2026-03-10 UTC · ZeroHedge / UBS Research</div>
+    <div class="card-body">
+      继德意志银行分析师Linenberg预警"对航空业构成生存性威胁"后，瑞银分析师Maheswari指出美国航空公司"几乎100%未对冲"$4/加仑以上的燃油成本（目前Gulf Coast Jet $3.82/加仑）。模拟分析：如燃油价格维持，DAL Q2 EPS将从$2.49降至$1.13（-55%），UAL从$4.78降至$0.96（-80%），AAL将转亏损-$0.31。Q1影响因危机发生于季末而部分缓冲，Q2才是关键。全年持续情境下，所有小型航空将录得年度亏损。
+    </div>
+    <div class="implication-box">
+      <div class="implication-label">💡 投资含义</div>
+      <strong>做空标的：</strong>AAL、JBLU、ALGT（盈利最脆弱）；航空板块整体JETS ETF短期承压。<br>
+      <strong>相对强：</strong>DAL（有精炼厂作为部分对冲）、UAL、LUV（相对较强）。<br>
+      <strong>连锁效应：</strong>航空减班将推高票价，对消费通胀形成二次拉升；机场地面服务、航空租赁公司也将承压。
+    </div>
+    <div class="source-link">来源：<a href="https://www.zerohedge.com/markets/first-deutsche-bank-now-ubs-warns-us-airlines-nearly-100-unhedged-against-energy-shock" target="_blank">https://www.zerohedge.com/markets/first-deutsche-bank-now-ubs-warns-us-airlines-nearly-100-unhedged-against-energy-shock</a></div>
+  </div>
+
+
+  <!-- ===== SECTION 4: 今日执行摘要 ===== -->
+  <div class="summary-section">
+    <div class="summary-title">⚡ 今日执行摘要 — 投资人最需要知道的8件事</div>
+    <ul class="summary-list">
+      <li><span class="bullet-dot"></span><strong>极端风险已实质化：</strong>伊朗开始布雷霍尔木兹海峡，非语言威胁，是行动升级。美军护航未启动，扫雷时间轴未知。能源风险溢价将持续走高。</li>
+      <li><span class="bullet-dot"></span><strong>供应冲击量级空前：</strong>中东减产超5 mb/d，相当于全球供应近5%凭空消失。EIA在一个月内将全年油价预测上调36%（$58→$79），这在机构历史上极为罕见。</li>
+      <li><span class="bullet-dot"></span><strong>IEA储备释放是最大短期价格下行风险：</strong>G7本次会议无决定，但随时可能行动。1.2B桶公共储备释放若落地，油价短期可能大幅下行。能源多头需对冲此尾部风险。</li>
+      <li><span class="bullet-dot"></span><strong>LNG危机同步爆发：</strong>卡塔尔停产 + 霍尔木兹封锁 = 全球约20%LNG供应中断。亚洲现货标购零成交，欧洲与亚洲激烈争夺替代供应，气价三年高位且未见顶。</li>
+      <li><span class="bullet-dot"></span><strong>顶级多策略基金深度受损，去杠杆压力未消：</strong>Millennium单周亏15亿，空油头寸集体逼空。警惕degrossing压力蔓延至非相关资产，是系统性风险放大器。</li>
+      <li><span class="bullet-dot"></span><strong>美国航空业Q2盈利雪崩在即：</strong>燃油未对冲 + $4+价格 = 大多数美国航空将录得Q2亏损。做空AAL等弱势航空，或关注相关CDS。</li>
+      <li><span class="bullet-dot"></span><strong>国债市场发出滞胀预警：</strong>3年期拍卖尾差创Liberation Day以来最大，外资需求降温。能源冲击+财政压力叠加，债市若持续承压将逼迫联储陷入两难（通胀vs.衰退）。</li>
+      <li><span class="bullet-dot"></span><strong>中国相对受益但竞争加剧：</strong>战略储备囤积使中国短期免于高价现货压力，但其参与俄油竞购将与印度形成直接竞争，影响Urals折扣结构。</li>
+    </ul>
+  </div>
+
+
+  <!-- ===== SECTION 5: 今日深度精选 ===== -->
+  <div class="deep-pick">
+    <div class="deep-pick-header">
+      <span class="deep-pick-label">⭐ 今日深度精选</span>
+      <span class="deep-pick-title">为何"布雷霍尔木兹"是本轮危机的质变节点</span>
+    </div>
+    <div class="deep-pick-body">
+      <strong>精选文章：《Oil Supply Risks Mount as Iran Lays Mines in Strait of Hormuz》</strong><br>
+      来源：OilPrice.com — Tom Kool, 2026-03-10<br><br>
+
+      <strong>为什么这是今日最值得深读的内容：</strong><br><br>
+
+      霍尔木兹海峡布雷，代表着从"威慑性封锁"向"物理性封锁"的质变。此前的危机形态是心理威胁与保险成本上升，油轮仍可冒险通行；布雷之后，物理清除水雷需要时间（数周至数月），且伊朗IRGC理论上可在扫雷过程中持续补布。<br><br>
+
+      这直接影响投资决策框架：<br>
+      • <strong>时间轴假设</strong>——过去市场定价的是"快速解决"（数天至2周），布雷后合理假设应延长至"数月"级别，供应中断的持久性将进入长期资产定价。<br>
+      • <strong>美国军事介入门槛</strong>——扫雷作业需要海军高度参与，等同于直接参战升级，政治代价极高，这使得美国"护航"选项的可信度下降，反而增强了伊朗的谈判筹码。<br>
+      • <strong>非线性风险</strong>——BCA Research将重大油价冲击概率定为70%，决策树复杂度远超此前。能源市场进入"黑天鹅常态化"阶段。<br><br>
+
+      <strong>投资行动建议：</strong>重新评估所有依赖"危机短期结束"假设的能源头寸；对冲基金degrossing风险是额外的流动性危机触发器；持有能源实物ETF（USO/XLE）而非期货展期密集的合成工具；关注非中东路线的油气资产重估机会（北海、深海巴西、美墨湾）。<br><br>
+
+      <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html" target="_blank" style="color:#1976d2;font-weight:600;">🔗 阅读原文</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  每日财经投资深度日报 · 2026-03-11 · 数据来源：OilPrice.com / ZeroHedge / EIA / IEA / Bloomberg<br>
+  本日报仅供投资参考，不构成投资建议。所有信息均来源于公开渠道，发布时间以UTC为准。
+</footer>
+
+</body>
+</html>
